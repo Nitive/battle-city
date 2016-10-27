@@ -1,4 +1,4 @@
-const { sum } = require('../')
+import { sum } from '../'
 
 test('sum', () => {
   expect(sum()).toBe(0)
