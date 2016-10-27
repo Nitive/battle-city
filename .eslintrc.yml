@@ -1,0 +1,4 @@
+extends: as
+
+env:
+  jest: true

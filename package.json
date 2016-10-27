@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Nitive/tanks/issues"
   },
-  "homepage": "https://github.com/Nitive/tanks#readme"
+  "homepage": "https://github.com/Nitive/tanks#readme",
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-config-as": "^0.1.6"
+  }
 }
