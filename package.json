@@ -1,0 +1,22 @@
+{
+  "name": "tanks",
+  "version": "0.1.0",
+  "description": "Tanks game has written in JavaScript",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nitive/tanks.git"
+  },
+  "keywords": [
+    "tanks",
+    "game"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nitive/tanks/issues"
+  },
+  "homepage": "https://github.com/Nitive/tanks#readme"
+}
