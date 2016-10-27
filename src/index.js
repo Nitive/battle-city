@@ -1,2 +1,5 @@
+// @flow
 
-export const sum = (...args) => args.reduce((acc, x) => acc + x, 0)
+export const sum = (...args: number[]) => {
+  return args.reduce((acc, x) => acc + x, 0)
+}
