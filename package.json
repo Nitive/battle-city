@@ -4,6 +4,8 @@
   "description": "Tanks game has written in JavaScript",
   "main": "src/index.js",
   "scripts": {
+    "start": "webpack -w",
+    "build": "webpack -p",
     "tdd": "npm test -- --watch",
     "test": "NODE_ENV=test jest"
   },
@@ -23,12 +25,15 @@
   "devDependencies": {
     "babel-eslint": "^7.1.0",
     "babel-jest": "^16.0.0",
+    "babel-loader": "^6.2.7",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "eslint": "^3.8.1",
     "eslint-config-as": "^0.1.6",
+    "file-loader": "^0.9.0",
     "flow-bin": "^0.33.0",
     "flow-typed": "^2.0.0",
+    "html-webpack-plugin": "^2.24.0",
     "jest": "^16.0.2",
     "webpack": "2.1.0-beta.25"
   }
