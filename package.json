@@ -36,5 +36,10 @@
     "html-webpack-plugin": "^2.24.0",
     "jest": "^16.0.2",
     "webpack": "2.1.0-beta.25"
+  },
+  "dependencies": {
+    "@cycle/dom": "^13.0.0",
+    "@cycle/xstream-run": "^3.1.0",
+    "xstream": "^7.0.0"
   }
 }
