@@ -1,4 +1,5 @@
 # Tanks
+[![Build Status](https://travis-ci.org/Nitive/tanks.svg?branch=travis)](https://travis-ci.org/Nitive/tanks)
 
 Tanks game has written in JavaScript
 
