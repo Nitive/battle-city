@@ -1,4 +1,7 @@
 {
+  "presets": [
+    ["latest", {"loose": true, "modules": false}]
+  ],
   "plugins": ["transform-flow-strip-types"],
   "env": {
     "test": {
