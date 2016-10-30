@@ -1,10 +1,9 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { HotModuleReplacementPlugin } = require('webpack')
 
 module.exports = {
-  entry: {
-    index: './src/index.js',
-  },
+  entry: ['./src/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].js',
@@ -23,8 +22,7 @@ module.exports = {
     }],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new HotModuleReplacementPlugin(),
   ],
 }
