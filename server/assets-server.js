@@ -1,6 +1,7 @@
 const express = require('express')
 const webpack = require('webpack')
 const DashboardPlugin = require('webpack-dashboard/plugin')
+const config = require('./config')
 
 // init app
 const app = express()
@@ -15,11 +16,13 @@ const compiler = webpack(webpackConfig)
 
 compiler.apply(new DashboardPlugin())
 
-app.use(require('webpack-dev-middleware')(compiler))
+app.use(require('webpack-dev-middleware')(compiler, {
+  publicPath: '/assets/',
+}))
 app.use(require('webpack-hot-middleware')(compiler, { log: () => {} }))
 
 
-const port = 3000
+const port = config.assets.port
 app.listen(port, err => {
   if (err) console.error(err)
   console.log(`http://localhost:${port}`)
