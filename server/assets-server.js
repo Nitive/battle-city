@@ -17,7 +17,7 @@ const compiler = webpack(webpackConfig)
 compiler.apply(new DashboardPlugin())
 
 app.use(require('webpack-dev-middleware')(compiler, {
-  publicPath: '/assets/',
+  publicPath: webpackConfig.output.publicPath,
 }))
 app.use(require('webpack-hot-middleware')(compiler, { log: () => {} }))
 
