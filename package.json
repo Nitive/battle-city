@@ -4,8 +4,9 @@
   "description": "Tanks game has written in JavaScript",
   "main": "src/index.js",
   "scripts": {
-    "start": "rm -rf dist/ && webpack-dashboard -- node server/assets-server.js",
-    "build": "rm -rf dist/ && webpack -p",
+    "assets:watch": "rm -rf dist/ && webpack-dashboard -- node server/assets-server.js",
+    "assets:build": "rm -rf dist/ && webpack -p",
+    "server": "node server/server.js",
     "tdd": "npm test -- --watch",
     "test": "NODE_ENV=test jest"
   },
