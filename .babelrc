@@ -2,7 +2,7 @@
   "presets": [
     ["latest", {"loose": true, "modules": false}]
   ],
-  "plugins": ["transform-flow-strip-types"],
+  "plugins": ["transform-flow-strip-types", "transform-object-rest-spread"],
   "env": {
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
