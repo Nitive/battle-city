@@ -8,6 +8,7 @@
     "assets:build": "rm -rf dist/ && webpack -p",
     "server": "node server/server.js",
     "tdd": "npm test -- --watch",
+    "pretest": "eslint src/ server/",
     "test": "NODE_ENV=test jest"
   },
   "repository": {
