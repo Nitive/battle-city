@@ -22,8 +22,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler, { log: () => {} }))
 
 
-const port = config.assets.port
-app.listen(port, err => {
+app.listen(config.assets.port, err => {
   if (err) console.error(err)
-  console.log(`http://localhost:${port}`)
+  console.log(`http://localhost:${config.assets.port}`)
 })
