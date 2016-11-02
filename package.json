@@ -7,6 +7,7 @@
     "assets:watch": "rm -rf dist/ && webpack-dashboard -- node server/assets-server.js",
     "assets:build": "rm -rf dist/ && webpack -p",
     "server": "node server/server.js",
+    "cover": "jest --coverage",
     "tdd": "npm test -- --watch",
     "pretest": "eslint src/ server/",
     "test": "NODE_ENV=test jest"
@@ -33,6 +34,7 @@
     "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-latest": "^6.16.0",
+    "codeclimate-test-reporter": "^0.4.0",
     "eslint": "^3.8.1",
     "eslint-config-as": "^0.1.6",
     "express": "^4.14.0",

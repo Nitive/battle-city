@@ -9,3 +9,6 @@ before_install:
   - npm i -g yarn@^0.16.1
 install:
   - yarn install
+after_success:
+  - npm run cover
+  - codeclimate-test-reporter < coverage/lcov.info
