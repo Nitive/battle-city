@@ -2,8 +2,9 @@
 node_modules/
 npm-debug.log
 
-# flow
+# enviroment
 flow-typed/
+coverage/
 
 # project
 dist/
