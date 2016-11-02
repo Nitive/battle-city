@@ -1,6 +1,5 @@
 const express = require('express')
 const webpack = require('webpack')
-const DashboardPlugin = require('webpack-dashboard/plugin')
 const config = require('./config')
 
 // init app
@@ -13,8 +12,6 @@ webpackConfig.entry = [
   'webpack-hot-middleware/client?reload=true',
 ].concat(webpackConfig.entry)
 const compiler = webpack(webpackConfig)
-
-compiler.apply(new DashboardPlugin())
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,

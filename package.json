@@ -4,9 +4,10 @@
   "description": "Tanks game has written in JavaScript",
   "main": "src/index.js",
   "scripts": {
-    "assets:watch": "rm -rf dist/ && webpack-dashboard -- node server/assets-server.js",
+    "assets:watch": "rm -rf dist/ && supervisor -w server/assets-server.js server/assets-server.js",
     "assets:build": "rm -rf dist/ && webpack -p",
-    "server": "node server/server.js",
+    "server": "supervisor -w server/ server/server.js",
+    "start": "concurrently --raw 'npm run assets:watch' 'npm run server'",
     "cover": "jest --coverage",
     "tdd": "npm test -- --watch",
     "pretest": "eslint src/ server/",
@@ -45,7 +46,6 @@
     "jest": "^16.0.2",
     "morgan": "^1.7.0",
     "webpack": "2.1.0-beta.25",
-    "webpack-dashboard": "^0.2.0",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.1"
   },
