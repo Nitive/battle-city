@@ -1,6 +1,6 @@
 const { env } = process
 
-const assetsPort = env.ASSETS_PORT || '5000'
+const assetsPort = env.ASSETS_PORT || '5431'
 
 module.exports = {
   isDev: ['development', 'dev', ''].includes(env.NODE_ENV),
