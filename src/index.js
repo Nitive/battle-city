@@ -4,11 +4,17 @@ import xs from 'xstream'
 import { run } from '@cycle/xstream-run'
 import { div, makeDOMDriver } from '@cycle/dom'
 import { makeKeyboardDriver } from 'cycle-keyboard'
+import { clamp } from 'ramda'
 
 type Position = {
   x: number;
   y: number;
 }
+
+const updatePosition = (position: Position, diff: Position) => ({
+  x: clamp(0, 800, position.x + diff.x),
+  y: clamp(0, 600, position.y + diff.y),
+})
 
 function main({ keyboard }) {
   const action$ = xs.merge(
@@ -20,10 +26,7 @@ function main({ keyboard }) {
 
   const start: Position = { x: 0, y: 0 }
 
-  const position$ = action$.fold((position: Position, diff) => ({
-    x: position.x + diff.x,
-    y: position.y + diff.y,
-  }), start)
+  const position$ = action$.fold(updatePosition, start)
 
   const vdom$ = position$.map(position => {
     return div(`Position is ${position.x}, ${position.y}`)
