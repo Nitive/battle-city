@@ -17,11 +17,12 @@ const updatePosition = (position: Position, diff: Position) => ({
 })
 
 function main({ keyboard }) {
+  const speed = 5
   const action$ = xs.merge(
-    keyboard.downs('up').mapTo({ x: +1, y: 0 }),
-    keyboard.downs('down').mapTo({ x: -1, y: 0 }),
-    keyboard.downs('left').mapTo({ x: 0, y: -1 }),
-    keyboard.downs('right').mapTo({ x: 0, y: +1 }),
+    keyboard.downs('up').mapTo({ x: speed, y: 0 }),
+    keyboard.downs('down').mapTo({ x: -speed, y: 0 }),
+    keyboard.downs('left').mapTo({ x: 0, y: -speed }),
+    keyboard.downs('right').mapTo({ x: 0, y: speed }),
   )
 
   const start: Position = { x: 0, y: 0 }
