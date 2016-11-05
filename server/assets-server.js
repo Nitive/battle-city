@@ -21,5 +21,5 @@ app.use(require('webpack-hot-middleware')(compiler, { log: () => {} }))
 
 app.listen(config.assets.port, err => {
   if (err) console.error(err)
-  console.log(`http://localhost:${config.assets.port}`)
+  console.log('Assets server is started')
 })
