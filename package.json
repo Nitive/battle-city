@@ -54,6 +54,8 @@
   "dependencies": {
     "@cycle/dom": "^13.0.0",
     "@cycle/xstream-run": "^3.1.0",
+    "cycle-animation-driver": "^0.3.0",
+    "cycle-canvas": "^0.2.0",
     "express-http-proxy": "^0.10.1",
     "xstream": "^7.0.0"
   }
