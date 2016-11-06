@@ -1,8 +1,8 @@
 [ignore]
 
 [include]
-./flow-typed/
 
 [libs]
+./interfaces/
 
 [options]
