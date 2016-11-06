@@ -4,9 +4,9 @@
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@cycle/base/-/base-4.1.1.tgz#cbe71cc7070d84e06354053a19583923fa484977"
 
-"@cycle/dom@^13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@cycle/dom/-/dom-13.0.0.tgz#4cb644f7848c6214024ea8eab8b87a88ddebfe1b"
+"@cycle/dom@^14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@cycle/dom/-/dom-14.0.0.tgz#b6fec95c40d0cb8f97f0252d9d0a8fd07d7b0a7b"
   dependencies:
     "@cycle/xstream-adapter" "3.x.x"
     es6-map "^0.1.4"
@@ -254,7 +254,7 @@ babel-code-frame@^6.16.0:
     esutils "^2.0.2"
     js-tokens "^2.0.0"
 
-babel-core@^6.0.0, babel-core@^6.11.4, babel-core@^6.18.0:
+babel-core@^6.0.0, babel-core@^6.11.4, babel-core@^6.18.0, babel-core@^6.18.2:
   version "6.18.2"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.18.2.tgz#d8bb14dd6986fa4f3566a26ceda3964fa0e04e5b"
   dependencies:
@@ -1726,7 +1726,7 @@ eslint@^2.9.0:
     text-table "~0.2.0"
     user-home "^2.0.0"
 
-eslint@^3.8.1:
+eslint@^3.9.1:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.9.1.tgz#5a8597706fc6048bc6061ac754d4a211d28f4f5b"
   dependencies:
@@ -1990,9 +1990,9 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-flow-bin@^0.33.0:
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.33.0.tgz#ef011eace7a6100f1ae08b852db78279032b8750"
+flow-bin@^0.34.0:
+  version "0.34.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.34.0.tgz#093ed36981e8fafc39d16f0b0878d0968aa80fad"
 
 flow-typed@^2.0.0:
   version "2.0.0"
@@ -2285,8 +2285,8 @@ html-entities@^1.2.0:
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.0.tgz#41948caf85ce82fed36e4e6a0ed371a6664379e2"
 
 html-minifier@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.1.0.tgz#e0b35d7a1fff89ae989e2fa51c572bc0d1f2d1f6"
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.1.1.tgz#73bd0600fc9d68f536b13a788360245b6d76eb9c"
   dependencies:
     change-case "3.0.x"
     clean-css "3.4.x"
@@ -2296,7 +2296,7 @@ html-minifier@^3.1.0:
     relateurl "0.2.x"
     uglify-js "2.7.x"
 
-html-webpack-plugin@^2.24.0:
+html-webpack-plugin@^2.24.1:
   version "2.24.1"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-2.24.1.tgz#7f45fc678f66eac2d433f22336b4399da023b57e"
   dependencies:
@@ -3759,7 +3759,7 @@ querystring@^0.2.0, querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-ramda:
+ramda@^0.22.1:
   version "0.22.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.22.1.tgz#031da0c3df417c5b33c96234757eb37033f36a0e"
 
