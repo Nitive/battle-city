@@ -1,5 +1,3 @@
-parser: babel-eslint
-
 extends: as
 
 env:

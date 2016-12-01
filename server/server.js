@@ -1,4 +1,3 @@
-const morgan = require('morgan')
 const express = require('express')
 const proxy = require('express-http-proxy')
 
@@ -7,6 +6,7 @@ const config = require('./config')
 const app = express()
 
 if (config.isDev) {
+  const morgan = require('morgan')
   app.use(morgan('dev'))
 }
 
