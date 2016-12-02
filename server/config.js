@@ -1,6 +1,8 @@
 const { env } = process
 
 const assetsPort = env.ASSETS_PORT || '5431'
+const assetsBaseUrl = env.ASSETS_BASE_URL || `http://localhost:${assetsPort}`
+const assetsPathname = '/assets'
 
 module.exports = {
   isDev: ['development', 'dev', ''].includes(env.NODE_ENV),
@@ -10,6 +12,8 @@ module.exports = {
   },
   assets: {
     port: assetsPort,
-    baseUrl: env.ASSETS_BASE_URL || `http://localhost:${assetsPort}/assets/`,
+    baseUrl: assetsBaseUrl,
+    pathname: assetsPathname,
+    fullUrl: assetsBaseUrl + assetsPathname,
   },
 }

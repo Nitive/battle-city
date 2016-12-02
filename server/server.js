@@ -1,5 +1,5 @@
 const express = require('express')
-const proxy = require('express-http-proxy')
+const proxy = require('http-proxy-middleware')
 
 const config = require('./config')
 
@@ -10,12 +10,14 @@ if (config.isDev) {
   app.use(morgan('dev'))
 }
 
-app.get('*', proxy(config.assets.baseUrl, {
-  forwardPath(req) {
-    return req.url === '/__webpack_hmr'
-      ? req.url
-      : '/assets/'
-  },
+app.use('/__webpack_hmr', proxy({
+  target: config.assets.baseUrl,
+  changeOrigin: true,
+}))
+
+app.use('/', proxy({
+  target: config.assets.fullUrl,
+  changeOrigin: true,
 }))
 
 app.listen(config.app.port, err => {
