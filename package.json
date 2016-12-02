@@ -1,17 +1,18 @@
 {
-  "name": "tanks",
+  "name": "battle-city",
   "version": "0.1.0",
   "description": "Tanks game has written in JavaScript",
-  "main": "src/index.js",
   "scripts": {
     "assets:watch": "rm -rf dist/ && supervisor -w server/assets-server.js server/assets-server.js",
     "assets:build": "rm -rf dist/ && webpack -p",
     "server": "supervisor -w server/ server/server.js",
     "start": "concurrently --raw \"npm run assets:watch\" \"npm run server\"",
-    "postinstall": "flow-typed install",
     "cover": "jest --coverage",
     "tdd": "npm test -- --watch",
-    "pretest": "eslint src/ server/",
+    "lint:js": "eslint server/ *.js",
+    "lint:ts": "tslint --project .",
+    "lint": "concurrently --raw \"npm run lint:js\" \"npm run lint:ts\"",
+    "pretest": "npm run lint",
     "test": "NODE_ENV=test jest"
   },
   "repository": {
@@ -28,36 +29,44 @@
   },
   "homepage": "https://github.com/Nitive/tanks#readme",
   "devDependencies": {
-    "babel-core": "^6.18.2",
-    "babel-eslint": "^7.1.0",
-    "babel-jest": "^16.0.0",
-    "babel-loader": "^6.2.7",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
-    "babel-plugin-transform-flow-strip-types": "^6.18.0",
-    "babel-plugin-transform-object-rest-spread": "^6.16.0",
-    "babel-preset-latest": "^6.16.0",
+    "@cycle/dom": "^14.1.0",
+    "@cycle/xstream-run": "^4.0.0",
+    "@types/jest": "^16.0.1",
+    "@types/ramda": "0.0.2",
     "codeclimate-test-reporter": "^0.4.0",
     "concurrently": "^3.1.0",
-    "eslint": "^3.9.1",
+    "cycle-keyboard": "1.0.0-rtm.4",
+    "eslint": "^3.11.1",
     "eslint-config-as": "^0.1.6",
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
-    "flow-bin": "^0.34.0",
-    "flow-typed": "^2.0.0",
     "html-webpack-plugin": "^2.24.1",
-    "jest": "^16.0.2",
+    "jest": "^17.0.3",
     "morgan": "^1.7.0",
-    "supervisor": "^0.11.0",
-    "webpack": "2.1.0-beta.25",
+    "supervisor": "^0.12.0",
+    "ts-jest": "^17.0.3",
+    "ts-loader": "^1.2.2",
+    "tslint": "^4.0.2",
+    "tslint-config-standard": "^2.0.0",
+    "typescript": "^2.0.10",
+    "webpack": "2.1.0-beta.27",
     "webpack-dev-middleware": "^1.8.4",
-    "webpack-hot-middleware": "^2.13.1"
+    "webpack-hot-middleware": "^2.13.2",
+    "xstream": "^9.0.0"
   },
   "dependencies": {
-    "@cycle/dom": "^14.0.0",
-    "@cycle/xstream-run": "^3.1.0",
-    "cycle-keyboard": "1.0.0-rtm.4",
     "express-http-proxy": "^0.10.1",
-    "ramda": "^0.22.1",
-    "xstream": "^7.0.0"
+    "ramda": "^0.22.1"
+  },
+  "jest": {
+    "transform": {
+      ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
+    "testRegex": ".*\\.test\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ]
   }
 }

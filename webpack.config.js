@@ -4,23 +4,23 @@ const { HotModuleReplacementPlugin } = require('webpack')
 const config = require('./server/config')
 
 module.exports = {
-  entry: ['./src/index.js'],
+  entry: ['./src/index.ts'],
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: config.assets.baseUrl,
     filename: '[name].[hash].js',
   },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
   module: {
     loaders: [{
-      test: /\.js$/,
-      loader: 'babel',
+      test: /\.ts$/,
+      loader: 'ts-loader',
       exclude: /node_modules/,
-      query: {
-        cacheDirectory: true,
-      },
     }, {
       test: /\.(png|jpg)/,
-      loader: 'file',
+      loader: 'file-loader',
     }],
   },
   plugins: [

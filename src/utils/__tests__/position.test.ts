@@ -1,5 +1,3 @@
-// @flow
-
 import { updatePosition, Position } from '../position'
 
 function checkUpdatePosition(start: Position, diff: Position, result: Position) {
