@@ -10,6 +10,7 @@ module.exports = {
   },
   assets: {
     port: assetsPort,
-    baseUrl: env.ASSETS_BASE_URL || `http://localhost:${assetsPort}/assets/`,
+    baseUrl: env.ASSETS_BASE_URL || `http://localhost:${assetsPort}`,
+    pathname: '/assets',
   },
 }

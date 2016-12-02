@@ -16,7 +16,7 @@ const compiler = webpack(webpackConfig)
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
 }))
-app.use(require('webpack-hot-middleware')(compiler, { log: () => {} }))
+app.use(require('webpack-hot-middleware')(compiler))
 
 
 app.listen(config.assets.port, err => {

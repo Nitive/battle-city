@@ -55,7 +55,7 @@
     "xstream": "^9.0.0"
   },
   "dependencies": {
-    "express-http-proxy": "^0.10.1",
+    "http-proxy-middleware": "^0.17.2",
     "ramda": "^0.22.1"
   },
   "jest": {
