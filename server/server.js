@@ -16,7 +16,7 @@ app.use('/__webpack_hmr', proxy({
 }))
 
 app.use('/', proxy({
-  target: `${config.assets.baseUrl}/${config.assets.pathname}/`,
+  target: config.assets.fullUrl,
   changeOrigin: true,
 }))
 

@@ -7,7 +7,7 @@ module.exports = {
   entry: ['./src/index.ts'],
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: config.assets.baseUrl,
+    publicPath: config.assets.fullUrl,
     filename: '[name].[hash].js',
   },
   resolve: {
