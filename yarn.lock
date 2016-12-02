@@ -1022,7 +1022,7 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-cycle-keyboard@1.0.0-rtm.4:
+cycle-keyboard@^1.0.0-rtm.4:
   version "1.0.0-rtm.4"
   resolved "https://registry.yarnpkg.com/cycle-keyboard/-/cycle-keyboard-1.0.0-rtm.4.tgz#7ac3d7a286d69652f7d1a45b6ecf084d0fc861f5"
   dependencies:
