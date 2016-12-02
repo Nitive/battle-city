@@ -10,7 +10,7 @@
     "cover": "jest --coverage",
     "tdd": "npm test -- --watch",
     "lint:js": "eslint server/ *.js",
-    "lint:ts": "tslint src/**/*.ts",
+    "lint:ts": "tslint --project .",
     "lint": "concurrently --raw \"npm run lint:js\" \"npm run lint:ts\"",
     "pretest": "npm run lint",
     "test": "NODE_ENV=test jest"
