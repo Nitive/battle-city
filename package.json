@@ -1,8 +1,7 @@
 {
-  "name": "tanks",
+  "name": "battle-city",
   "version": "0.1.0",
   "description": "Tanks game has written in JavaScript",
-  "main": "src/index.js",
   "scripts": {
     "assets:watch": "rm -rf dist/ && supervisor -w server/assets-server.js server/assets-server.js",
     "assets:build": "rm -rf dist/ && webpack -p",
@@ -10,7 +9,10 @@
     "start": "concurrently --raw \"npm run assets:watch\" \"npm run server\"",
     "cover": "jest --coverage",
     "tdd": "npm test -- --watch",
-    "pretest": "eslint src/ server/",
+    "lint:js": "eslint server/ *.js",
+    "lint:ts": "tslint src/**/*.ts",
+    "lint": "concurrently --raw \"npm run lint:js\" \"npm run lint:ts\"",
+    "pretest": "npm run lint",
     "test": "NODE_ENV=test jest"
   },
   "repository": {

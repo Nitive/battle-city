@@ -2,6 +2,3 @@ extends: as
 
 env:
   jest: true
-
-rules:
-  arrow-parens: 0
