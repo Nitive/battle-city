@@ -29,7 +29,6 @@
   },
   "homepage": "https://github.com/Nitive/tanks#readme",
   "devDependencies": {
-    "@cycle/base": "^4.1.1",
     "@cycle/dom": "^14.1.0",
     "@cycle/xstream-run": "^4.0.0",
     "@types/jest": "^16.0.1",
