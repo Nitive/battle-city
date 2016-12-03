@@ -1,12 +1,16 @@
-import xs from 'xstream'
+import xs, { Stream } from 'xstream'
 import { run } from '@cycle/xstream-run'
-import { div, makeDOMDriver, DOMSource } from '@cycle/dom'
+import { div, makeDOMDriver, DOMSource, VNode } from '@cycle/dom'
 import { makeKeysDriver, KeysSource, KeyCode } from './utils/keys-driver'
 import { step, Position, Direction } from './utils/position'
 
-interface Drivers {
+interface Sources {
   DOM: DOMSource
   keys: KeysSource
+}
+
+interface Sinks {
+  DOM: Stream<VNode>
 }
 
 function log<T>(data: T): T {
@@ -20,8 +24,27 @@ interface State {
   direction?: Direction
 }
 
-function main({ keys, DOM }: Drivers) {
-  const speed = 5
+const speed = 5
+const startPosition: Position = { x: 0, y: 0 }
+const initialState = {
+  position: startPosition,
+}
+
+function reducer(state: State, nextState: State): State {
+  const isNextTick = nextState.time > state.time
+
+  const nextPosition = isNextTick && nextState.direction != null
+    ? step(state.position, nextState.direction, speed)
+    : state.position
+
+  return {
+    position: nextPosition,
+    time: nextState.time,
+    direction: nextState.direction,
+  }
+}
+
+function main({ keys, DOM }: Sources): Sinks {
   const direction$ = xs.merge(
     keys.down(KeyCode.Up).mapTo(Direction.Up),
     keys.down(KeyCode.Down).mapTo(Direction.Down),
@@ -33,28 +56,9 @@ function main({ keys, DOM }: Drivers) {
     keys.up(KeyCode.Right).mapTo(undefined),
   )
 
-  const startPosition: Position = { x: 0, y: 0 }
   const position$ = xs.of(startPosition)
 
-  const initialState = {
-    position: startPosition,
-  }
-
-  function reducer(state: State, nextState: State): State {
-    const isNextTick = nextState.time > state.time
-
-    const nextPosition = isNextTick && nextState.direction != null
-      ? step(state.position, nextState.direction, speed)
-      : state.position
-
-    return {
-      position: nextPosition,
-      time: nextState.time,
-      direction: nextState.direction,
-    }
-  }
-
-  const time$ = xs.periodic(100).startWith(0)
+  const time$ = xs.periodic(100)
 
   const state$ = xs
     .combine(position$, time$, direction$)
