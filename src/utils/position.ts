@@ -21,7 +21,7 @@ const diffs: { [key: number]: Position } = {
   [Direction.Right]: { x: 0, y: 1 },
 }
 
-export function getDiffByDirection(direction: Direction, speed: number): Position {
+export function getDiffByDirection(direction: Direction, speed: number = 1): Position {
   const diff = diffs[direction]
   return {
     x: diff.x * speed,
