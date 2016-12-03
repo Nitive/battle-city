@@ -62,7 +62,7 @@ function main({ keys, DOM }: Drivers) {
     .fold(reducer, initialState)
 
   const vdom$ = state$.map(state => {
-    const { position } = state;
+    const { position } = state
     return div(`Position is ${position.x}, ${position.y}`)
   })
 
