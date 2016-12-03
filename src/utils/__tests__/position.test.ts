@@ -1,4 +1,4 @@
-import { updatePosition, getDiffByDirection, Position, Direction } from '../position'
+import { updatePosition, getDiffByDirection, step, Position, Direction } from '../position'
 
 function checkUpdatePosition(start: Position, diff: Position, result: Position) {
   expect(updatePosition(start, diff)).toEqual(result)
@@ -28,4 +28,12 @@ test('getDiffByDirection should work with custom speed', () => {
   expect(getDiffByDirection(Direction.Down, 5)).toEqual({ x: -5, y: 0 })
   expect(getDiffByDirection(Direction.Left, 5)).toEqual({ x: 0, y: -5 })
   expect(getDiffByDirection(Direction.Right, 5)).toEqual({ x: 0, y: 5 })
+})
+
+test('step should work', () => {
+  expect(step({ x: 0, y: 0 }, Direction.Up)).toEqual({ x: 1, y: 0 })
+})
+
+test('step should work with custom speed', () => {
+  expect(step({ x: 0, y: 0 }, Direction.Right, 5)).toEqual({ x: 0, y: 5 })
 })

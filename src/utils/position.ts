@@ -29,6 +29,6 @@ export function getDiffByDirection(direction: Direction, speed: number = 1): Pos
   }
 }
 
-export function step(position: Position, direction: Direction, speed: number): Position {
+export function step(position: Position, direction: Direction, speed: number = 1): Position {
   return updatePosition(position, getDiffByDirection(direction, speed))
 }
