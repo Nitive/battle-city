@@ -1,28 +1,68 @@
-import xs, { Stream } from 'xstream'
+import xs from 'xstream'
 import { run } from '@cycle/xstream-run'
 import { div, makeDOMDriver, DOMSource } from '@cycle/dom'
-import { makeKeyboardDriver, KeyboardSource } from 'cycle-keyboard'
-import { updatePosition } from './utils/position'
+import { makeKeysDriver, KeysSource, KeyCode } from './utils/keys-driver'
+import { step, Position, Direction } from './utils/position'
 
-interface IDrivers {
-  DOM: DOMSource,
-  keyboard: KeyboardSource,
+interface Drivers {
+  DOM: DOMSource
+  keys: KeysSource
 }
 
-function main({ keyboard, DOM }: IDrivers) {
+function log<T>(data: T): T {
+  console.log(data)
+  return data
+}
+
+interface State {
+  position: Position
+  time: number
+  direction?: Direction
+}
+
+function main({ keys, DOM }: Drivers) {
   const speed = 5
-  const action$ = xs.merge(
-    keyboard.downs('up').mapTo({ x: +speed, y: 0 }) as any,
-    keyboard.downs('down').mapTo({ x: -speed, y: 0 }) as any,
-    keyboard.downs('left').mapTo({ x: 0, y: -speed }) as any,
-    keyboard.downs('right').mapTo({ x: 0, y: +speed }) as any,
+  const direction$ = xs.merge(
+    keys.down(KeyCode.Up).mapTo(Direction.Up),
+    keys.down(KeyCode.Down).mapTo(Direction.Down),
+    keys.down(KeyCode.Left).mapTo(Direction.Left),
+    keys.down(KeyCode.Right).mapTo(Direction.Right),
+    keys.up(KeyCode.Up).mapTo(undefined),
+    keys.up(KeyCode.Down).mapTo(undefined),
+    keys.up(KeyCode.Left).mapTo(undefined),
+    keys.up(KeyCode.Right).mapTo(undefined),
   )
 
-  const start = { x: 0, y: 0 }
+  const startPosition: Position = { x: 0, y: 0 }
+  const position$ = xs.of(startPosition)
 
-  const position$ = action$.fold(updatePosition, start)
+  const initialState = {
+    position: startPosition,
+  }
 
-  const vdom$ = position$.map(position => {
+  function reducer(state: State, nextState: State): State {
+    const isNextTick = nextState.time > state.time
+
+    const nextPosition = isNextTick && nextState.direction != null
+      ? step(state.position, nextState.direction, speed)
+      : state.position
+
+    return {
+      position: nextPosition,
+      time: nextState.time,
+      direction: nextState.direction,
+    }
+  }
+
+  const time$ = xs.periodic(100).startWith(0)
+
+  const state$ = xs
+    .combine(position$, time$, direction$)
+    .map(([position, time, direction]): State => ({ position, time, direction }))
+    .fold(reducer, initialState)
+
+  const vdom$ = state$.map(state => {
+    const { position } = state;
     return div(`Position is ${position.x}, ${position.y}`)
   })
 
@@ -33,5 +73,5 @@ function main({ keyboard, DOM }: IDrivers) {
 
 run(main, {
   DOM: makeDOMDriver('#app'),
-  keyboard: makeKeyboardDriver(),
+  keys: makeKeysDriver(),
 })
