@@ -1,8 +1,9 @@
 import xs, { Stream } from 'xstream'
 import { run } from '@cycle/xstream-run'
-import { div, makeDOMDriver, DOMSource, VNode } from '@cycle/dom'
+import { svg, div, makeDOMDriver, DOMSource, VNode } from '@cycle/dom'
 import { makeKeysDriver, KeysSource, KeyCode } from './utils/keys-driver'
 import { step, Position, Direction } from './utils/position'
+import tank from './components/tank'
 
 interface Sources {
   DOM: DOMSource
@@ -22,6 +23,7 @@ interface State {
   position: Position
   time: number
   direction?: Direction
+  lastDirection?: Direction
 }
 
 const speed = 5
@@ -41,6 +43,9 @@ function reducer(state: State, nextState: State): State {
     position: nextPosition,
     time: nextState.time,
     direction: nextState.direction,
+    lastDirection: nextState.direction != null
+      ? nextState.direction
+      : state.lastDirection,
   }
 }
 
@@ -58,16 +63,23 @@ function main({ keys, DOM }: Sources): Sinks {
 
   const position$ = xs.of(startPosition)
 
-  const time$ = xs.periodic(100)
+  const time$ = xs.periodic(50)
 
   const state$ = xs
     .combine(position$, time$, direction$)
     .map(([position, time, direction]): State => ({ position, time, direction }))
     .fold(reducer, initialState)
 
-  const vdom$ = state$.map(state => {
+  const vdom$ = state$.map((state: State) => {
     const { position } = state
-    return div(`Position is ${position.x}, ${position.y}`)
+    return div([
+      svg({ style: { width: 800, height: 600, background: '#d8d8d8' } }, [
+        svg.g([
+          tank(position, state.lastDirection),
+        ]),
+      ]),
+      div(`Position is x: ${position.x}, y: ${position.y}`),
+    ])
   })
 
   return {
