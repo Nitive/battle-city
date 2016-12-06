@@ -17,23 +17,23 @@ test('updatePosition should has limits', () => {
 })
 
 test('getDiffByDirection should work', () => {
-  expect(getDiffByDirection(Direction.Up)).toEqual({ x: 1, y: 0 })
-  expect(getDiffByDirection(Direction.Down)).toEqual({ x: -1, y: 0 })
-  expect(getDiffByDirection(Direction.Left)).toEqual({ x: 0, y: -1 })
-  expect(getDiffByDirection(Direction.Right)).toEqual({ x: 0, y: 1 })
+  expect(getDiffByDirection(Direction.Up)).toEqual({ x: 0, y: -1 })
+  expect(getDiffByDirection(Direction.Down)).toEqual({ x: 0, y: 1 })
+  expect(getDiffByDirection(Direction.Left)).toEqual({ x: -1, y: 0 })
+  expect(getDiffByDirection(Direction.Right)).toEqual({ x: 1, y: 0 })
 })
 
 test('getDiffByDirection should work with custom speed', () => {
-  expect(getDiffByDirection(Direction.Up, 5)).toEqual({ x: 5, y: 0 })
-  expect(getDiffByDirection(Direction.Down, 5)).toEqual({ x: -5, y: 0 })
-  expect(getDiffByDirection(Direction.Left, 5)).toEqual({ x: 0, y: -5 })
-  expect(getDiffByDirection(Direction.Right, 5)).toEqual({ x: 0, y: 5 })
+  expect(getDiffByDirection(Direction.Up, 5)).toEqual({ x: 0, y: -5 })
+  expect(getDiffByDirection(Direction.Down, 5)).toEqual({ x: 0, y: 5 })
+  expect(getDiffByDirection(Direction.Left, 5)).toEqual({ x: -5, y: 0 })
+  expect(getDiffByDirection(Direction.Right, 5)).toEqual({ x: 5, y: 0 })
 })
 
 test('step should work', () => {
-  expect(step({ x: 0, y: 0 }, Direction.Up)).toEqual({ x: 1, y: 0 })
+  expect(step({ x: 0, y: 0 }, Direction.Down)).toEqual({ x: 0, y: 1 })
 })
 
 test('step should work with custom speed', () => {
-  expect(step({ x: 0, y: 0 }, Direction.Right, 5)).toEqual({ x: 0, y: 5 })
+  expect(step({ x: 0, y: 0 }, Direction.Right, 5)).toEqual({ x: 5, y: 0 })
 })
