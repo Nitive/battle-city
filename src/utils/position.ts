@@ -15,10 +15,10 @@ export function updatePosition(position: Position, diff: Position): Position {
 }
 
 const diffs: { [key: number]: Position } = {
-  [Direction.Up]: { x: 1, y: 0 },
-  [Direction.Down]: { x: -1, y: 0 },
-  [Direction.Left]: { x: 0, y: -1 },
-  [Direction.Right]: { x: 0, y: 1 },
+  [Direction.Up]: { x: 0, y: -1 },
+  [Direction.Down]: { x: 0, y: 1 },
+  [Direction.Left]: { x: -1, y: 0 },
+  [Direction.Right]: { x: 1, y: 0 },
 }
 
 export function getDiffByDirection(direction: Direction, speed: number = 1): Position {
