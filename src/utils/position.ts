@@ -1,16 +1,20 @@
 import { clamp } from 'ramda'
 
+import { Direction } from './direction'
+import * as field from '../components/field'
+import * as tank from '../components/tank'
+
 export interface Position {
   x: number
   y: number
 }
 
-export const enum Direction { Up, Down, Left, Right }
-
 export function updatePosition(position: Position, diff: Position): Position {
+  const maxX = field.width - tank.width
+  const maxY = field.height - tank.height
   return {
-    x: clamp(0, 800, position.x + diff.x),
-    y: clamp(0, 600, position.y + diff.y),
+    x: clamp(0, maxX, position.x + diff.x),
+    y: clamp(0, maxY, position.y + diff.y),
   }
 }
 

@@ -1,9 +1,10 @@
 import { svg, VNode } from '@cycle/dom'
 
-import { Position, Direction } from '../../utils/position'
+import { Position } from '../../utils/position'
+import { Direction } from '../../utils/direction'
 
-const width = 60
-const height = 60
+export const width = 60
+export const height = 60
 
 const directions = {
   [Direction.Up]: 0,
