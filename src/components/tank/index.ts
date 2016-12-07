@@ -12,6 +12,23 @@ const directions = {
   [Direction.Right]: 90,
 }
 
+const tankBody = svg.rect({
+  attrs: {
+    x: 5,
+    y: 5,
+    width: 50,
+    height: 50,
+    fill: 'red',
+  },
+})
+
+const tankGun = svg.path({
+  attrs: {
+    fill: '#000',
+    d: 'M25 0h10v35H25z',
+  },
+})
+
 export default function tank(position: Position, direction: Direction = Direction.Right): VNode {
   const { x, y } = position
   const rotation = directions[direction]
@@ -23,9 +40,5 @@ export default function tank(position: Position, direction: Direction = Directio
     transform: rotate + translate,
   }
 
-  return svg.g({ attrs: containerStyle }, [
-    svg.rect({ attrs: { width, height, fill: 'rgba(0, 0, 0, 0)' } }),
-    svg.path({ attrs: { fill: '#f00', d: 'M5 10h50v50H5z' } }),
-    svg.path({ attrs: { fill: '#000', d: 'M25 0h10v35H25z' } }),
-  ])
+  return svg.g({ attrs: containerStyle }, [tankBody, tankGun])
 }
