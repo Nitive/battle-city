@@ -1,4 +1,5 @@
-import { updatePosition, getDiffByDirection, step, Position, Direction } from '../position'
+import { updatePosition, getDiffByDirection, step, Position } from '../position'
+import { Direction } from '../direction'
 
 function checkUpdatePosition(start: Position, diff: Position, result: Position) {
   expect(updatePosition(start, diff)).toEqual(result)
@@ -13,7 +14,7 @@ test('updatePosition should work', () => {
 
 test('updatePosition should has limits', () => {
   checkUpdatePosition({ x: 0, y: 0 }, { x: -1, y: -1 }, { x: 0, y: 0 })
-  checkUpdatePosition({ x: 0, y: 0 }, { x: 1000, y: 1000 }, { x: 800, y: 600 })
+  checkUpdatePosition({ x: 0, y: 0 }, { x: 1000, y: 1000 }, { x: 740, y: 540 })
 })
 
 test('getDiffByDirection should work', () => {

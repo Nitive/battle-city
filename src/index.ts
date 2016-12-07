@@ -1,8 +1,11 @@
 import xs, { Stream } from 'xstream'
 import { run } from '@cycle/xstream-run'
 import { svg, div, makeDOMDriver, DOMSource, VNode } from '@cycle/dom'
+
 import { makeKeysDriver, KeysSource, KeyCode } from './utils/keys-driver'
-import { step, Position, Direction } from './utils/position'
+import { step, Position } from './utils/position'
+import { Direction } from './utils/direction'
+import field from './components/field'
 import tank from './components/tank'
 
 interface Sources {
@@ -73,10 +76,8 @@ function main({ keys, DOM }: Sources): Sinks {
   const vdom$ = state$.map((state: State) => {
     const { position } = state
     return div([
-      svg({ style: { width: 800, height: 600, background: '#d8d8d8' } }, [
-        svg.g([
-          tank(position, state.lastDirection),
-        ]),
+      field([
+        tank(position, state.lastDirection),
       ]),
       div(`Position is x: ${position.x}, y: ${position.y}`),
     ])
