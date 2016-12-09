@@ -5,11 +5,6 @@ const config = require('./config')
 
 const app = express()
 
-if (config.isDev) {
-  const morgan = require('morgan')
-  app.use(morgan('dev'))
-}
-
 app.use('/__webpack_hmr', proxy({
   target: config.assets.baseUrl,
   changeOrigin: true,

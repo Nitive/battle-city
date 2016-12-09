@@ -15,8 +15,9 @@ const compiler = webpack(webpackConfig)
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
+  reporter: require('webpack-dots-reporter')(),
 }))
-app.use(require('webpack-hot-middleware')(compiler))
+app.use(require('webpack-hot-middleware')(compiler, { log: () => {} }))
 
 app.get('/_/info', (req, res) => {
   res.send(`
