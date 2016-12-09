@@ -6,7 +6,7 @@ import { Direction } from '../../utils/direction'
 export const width = 60
 export const height = 60
 
-const directions = {
+const angles = {
   [Direction.Up]: 0,
   [Direction.Down]: 180,
   [Direction.Left]: -90,
@@ -32,7 +32,7 @@ const tankGun = svg.path({
 
 export default function tank(position: Position, direction: Direction = Direction.Right): VNode {
   const { x, y } = position
-  const rotation = directions[direction]
+  const rotation = angles[direction]
 
   const translate = `translate(${x} ${y})`
   // second and third args to fix transform origin
