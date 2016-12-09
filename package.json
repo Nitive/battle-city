@@ -8,12 +8,12 @@
     "server": "supervisor -w server/ server/server.js",
     "start": "concurrently --raw \"npm run assets:watch\" \"npm run server\"",
     "cover": "jest --coverage",
-    "tdd": "npm test -- --watch",
+    "tdd": "jest --watch",
     "lint:js": "eslint server/ *.js",
     "lint:ts": "tslint --project .",
     "lint": "concurrently --raw \"npm run lint:js\" \"npm run lint:ts\"",
     "pretest": "npm run lint",
-    "test": "NODE_ENV=test jest"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -62,7 +62,7 @@
       ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
-    "testRegex": ".*\\.test\\.(ts|js)$",
+    "testRegex": ".*test\\.(ts|js)$",
     "moduleFileExtensions": [
       "ts",
       "js"
