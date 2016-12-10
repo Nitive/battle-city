@@ -2,7 +2,6 @@ import xs from 'xstream'
 import xstreamAdapter from '@cycle/xstream-adapter'
 import { span, div, makeHTMLDriver, VNode } from '@cycle/dom'
 
-
 // * Use this way: *
 // const html = await toHTML(div(['123']))
 // expect(html).toBe('<div>123</div>')
