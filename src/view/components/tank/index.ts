@@ -1,7 +1,7 @@
 import { svg, VNode } from '@cycle/dom'
 
-import { Position } from '../../utils/position'
-import { Direction } from '../../utils/direction'
+import { Position } from '../../../state/utils/position'
+import { Direction } from '../../../state/utils/direction'
 
 export const width = 60
 export const height = 60

@@ -1,6 +1,6 @@
 import { State } from '.'
 import { Action } from './actions'
-import { step } from '../view/utils/position'
+import { step } from './utils/position'
 
 const speed = 5
 
