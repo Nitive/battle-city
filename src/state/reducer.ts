@@ -9,7 +9,7 @@ export default function reducer(state: State, action: Action): State {
     case 'ChangeDirection':
       const { direction } = action.payload
       return {
-        position: state.position,
+        ...state,
         direction,
         lastDirection: direction != null
           ? direction
@@ -18,11 +18,10 @@ export default function reducer(state: State, action: Action): State {
 
     case 'Tick':
       return {
+        ...state,
         position: state.direction != null
           ? step(state.position, state.direction, speed)
           : state.position,
-        direction: state.direction,
-        lastDirection: state.lastDirection,
       }
   }
 }
