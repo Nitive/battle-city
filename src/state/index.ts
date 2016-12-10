@@ -12,7 +12,6 @@ import { Action } from './actions'
 
 export type State = {
   position: Position,
-  time: number,
   direction?: Direction,
   lastDirection?: Direction,
 }
@@ -20,7 +19,6 @@ export type State = {
 const startPosition: Position = { x: 0, y: 0 }
 const initialState: State = {
   position: startPosition,
-  time: 0,
 }
 
 export function intent({ keys }: Sources): Stream<Action> {
