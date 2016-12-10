@@ -4,9 +4,9 @@ import { Direction } from './direction'
 import * as field from '../components/field'
 import * as tank from '../components/tank'
 
-export interface Position {
-  x: number
-  y: number
+export type Position = {
+  x: number,
+  y: number,
 }
 
 export function updatePosition(position: Position, diff: Position): Position {
