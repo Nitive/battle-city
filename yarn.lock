@@ -15,7 +15,7 @@
     snabbdom-selector "^0.4.0"
     snabbdom-to-html "^2.0.1"
 
-"@cycle/xstream-adapter@3.x.x":
+"@cycle/xstream-adapter@^3.0.4", "@cycle/xstream-adapter@3.x.x":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@cycle/xstream-adapter/-/xstream-adapter-3.0.4.tgz#54c440b02ef3c8433cdb2d31082c8e5d0dd4d93a"
 

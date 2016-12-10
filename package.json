@@ -30,6 +30,7 @@
   "homepage": "https://github.com/Nitive/tanks#readme",
   "devDependencies": {
     "@cycle/dom": "^14.1.0",
+    "@cycle/xstream-adapter": "^3.0.4",
     "@cycle/xstream-run": "^4.0.0",
     "@types/jest": "^16.0.1",
     "@types/ramda": "0.0.2",
