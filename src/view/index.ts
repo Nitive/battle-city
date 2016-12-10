@@ -5,7 +5,7 @@ import { State } from '../state'
 import field from './components/field'
 import tank from './components/tank'
 
-export function view(state$: Stream<State>): Stream<VNode> {
+export default function view(state$: Stream<State>): Stream<VNode> {
   return state$.map(state => {
     const { position, lastDirection } = state
     return div([

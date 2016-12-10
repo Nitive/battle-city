@@ -1,4 +1,3 @@
-import xs from 'xstream'
 import { makeKeysDriver, KeyCode } from '../keys-driver'
 
 type KeyEventType = 'keydown' | 'keyup' | 'keypress'
