@@ -1,7 +1,7 @@
 import xs, { Stream } from 'xstream'
 
-import { Position } from '../view/utils/position'
-import { Direction } from '../view/utils/direction'
+import { Position } from '../state/utils/position'
+import { Direction } from '../state/utils/direction'
 import { KeyCode } from '../utils/keys-driver'
 
 import { Sources } from '..'

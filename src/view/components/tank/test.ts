@@ -1,5 +1,5 @@
-import { Position } from '../../utils/position'
-import { Direction } from '../../utils/direction'
+import { Position } from '../../../state/utils/position'
+import { Direction } from '../../../state/utils/direction'
 import { toHTML } from '../../__tests__/test-helpers'
 
 import tank from '.'

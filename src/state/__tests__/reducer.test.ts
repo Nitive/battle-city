@@ -1,4 +1,4 @@
-import { Direction } from '../../view/utils/direction'
+import { Direction } from '../utils/direction'
 import reducer from '../reducer'
 import * as actions from '../actions'
 

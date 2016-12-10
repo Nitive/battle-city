@@ -1,4 +1,4 @@
-import { Direction } from '../view/utils/direction'
+import { Direction } from './utils/direction'
 
 export type ChangeDirectionAction
   = { type: 'ChangeDirection', payload: { direction?: Direction } }

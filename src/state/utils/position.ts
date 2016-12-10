@@ -1,8 +1,8 @@
 import { clamp } from 'ramda'
 
 import { Direction } from './direction'
-import * as field from '../components/field'
-import * as tank from '../components/tank'
+import * as field from '../../view/components/field'
+import * as tank from '../../view/components/tank'
 
 export type Position = {
   x: number,
