@@ -1,10 +1,14 @@
 import xs, { Stream } from 'xstream'
 
-import { step, Position } from '../view/utils/position'
+import { Position } from '../view/utils/position'
 import { Direction } from '../view/utils/direction'
 import { KeyCode } from '../utils/keys-driver'
 
 import { Sources } from '..'
+
+import reducer from './reducer'
+import * as actions from './actions'
+import { Action } from './actions'
 
 export type State = {
   position: Position,
@@ -13,46 +17,13 @@ export type State = {
   lastDirection?: Direction,
 }
 
-export type ChangeDirectionAction
-  = { type: 'ChangeDirection', payload: { direction?: Direction } }
-
-export type TickAction
-  = { type: 'Tick' }
-
-export type Action
-  = ChangeDirectionAction
-  | TickAction
-
-const speed = 5
 const startPosition: Position = { x: 0, y: 0 }
 const initialState: State = {
   position: startPosition,
   time: 0,
 }
 
-export function reducer(state: State, action: Action): State {
-  switch (action.type) {
-    case 'ChangeDirection':
-      return {
-        position: state.position,
-        time: state.time,
-        direction: action.payload.direction,
-        lastDirection: action.payload.direction || state.lastDirection,
-      }
-
-    case 'Tick':
-      return {
-        position: state.direction
-          ? step(state.position, state.direction, speed)
-          : state.position,
-        time: state.time + 50,
-        direction: state.direction,
-        lastDirection: state.lastDirection,
-      }
-  }
-}
-
-export function intent({ keys, DOM }: Sources): Stream<Action> {
+export function intent({ keys }: Sources): Stream<Action> {
   const direction$ = xs
     .merge(
       keys.down(KeyCode.Up).mapTo(Direction.Up),
@@ -64,14 +35,9 @@ export function intent({ keys, DOM }: Sources): Stream<Action> {
       keys.up(KeyCode.Left).mapTo(undefined),
       keys.up(KeyCode.Right).mapTo(undefined),
     )
-    .map<ChangeDirectionAction>(direction => {
-      return {
-        type: 'ChangeDirection',
-        payload: { direction },
-      }
-    })
+    .map(actions.changeDirection)
 
-  const time$ = xs.periodic(50).mapTo<TickAction>({ type: 'Tick' })
+  const time$ = xs.periodic(50).mapTo(actions.tick())
   return xs.merge(direction$, time$)
 }
 
