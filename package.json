@@ -7,7 +7,7 @@
     "assets:build": "rm -rf dist/ && webpack -p",
     "server": "supervisor -w server/ server/server.js",
     "start": "concurrently --raw \"npm run assets:watch\" \"npm run server\"",
-    "cover": "jest --coverage",
+    "cover": "jest --coverage --no-cache",
     "tdd": "jest --watch",
     "lint:js": "eslint server/ *.js",
     "lint:ts": "tslint --project .",
