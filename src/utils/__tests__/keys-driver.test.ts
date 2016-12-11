@@ -7,42 +7,44 @@ function keyEvent(type: KeyEventType, keyCode: number) {
   document.dispatchEvent(spaceDown)
 }
 
-test('keysDriver down', done => {
-  const driver = makeKeysDriver()
-  const keys$ = driver()
+describe('keysDriver', () => {
+  it('down', done => {
+    const driver = makeKeysDriver()
+    const keys$ = driver()
 
-  keys$
-    .down(KeyCode.Space)
-    .addListener({
-      next(event) {
-        expect(event.keyCode).toBe(32)
-        done()
-      },
-      error: done,
-      complete: () => {
-        throw new Error('should not complete')
-      },
-    })
+    keys$
+      .down(KeyCode.Space)
+      .addListener({
+        next(event) {
+          expect(event.keyCode).toBe(32)
+          done()
+        },
+        error: done,
+        complete: () => {
+          throw new Error('should not complete')
+        },
+      })
 
-    keyEvent('keydown', 32)
-})
+      keyEvent('keydown', 32)
+  })
 
-test('keysDriver up', done => {
-  const driver = makeKeysDriver()
-  const keys$ = driver()
+  it('up', done => {
+    const driver = makeKeysDriver()
+    const keys$ = driver()
 
-  keys$
-    .up(KeyCode.Space)
-    .addListener({
-      next(event) {
-        expect(event.keyCode).toBe(32)
-        done()
-      },
-      error: done,
-      complete: () => {
-        throw new Error('should not complete')
-      },
-    })
+    keys$
+      .up(KeyCode.Space)
+      .addListener({
+        next(event) {
+          expect(event.keyCode).toBe(32)
+          done()
+        },
+        error: done,
+        complete: () => {
+          throw new Error('should not complete')
+        },
+      })
 
-    keyEvent('keyup', 32)
+      keyEvent('keyup', 32)
+  })
 })
