@@ -16,9 +16,11 @@ app.use('/', proxy({
 }))
 
 app.listen(config.app.port, err => {
+  /* eslint-disable no-console */
   if (err) {
     console.error(err)
     return
   }
   console.log(`Listening http://localhost:${config.app.port}`)
+  /* eslint-enable no-console */
 })

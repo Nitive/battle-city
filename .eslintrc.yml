@@ -1,4 +1,8 @@
-extends: as
+extends: airbnb-base
 
 env:
   jest: true
+
+rules:
+  semi: ['error', 'never']
+  arrow-parens: ['error', 'as-needed']
