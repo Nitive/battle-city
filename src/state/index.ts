@@ -1,7 +1,8 @@
 import xs, { Stream } from 'xstream'
 
-import { Position } from '../state/utils/position'
-import { Direction } from '../state/utils/direction'
+import { Position } from './utils/position'
+import { Direction } from './utils/direction'
+import { Bullet } from './utils/bullet'
 import { KeyCode } from '../utils/keys-driver'
 
 import { Sources } from '..'
@@ -12,13 +13,14 @@ import { Action } from './actions'
 
 export type State = {
   position: Position,
+  bullets: Bullet[],
   direction?: Direction,
   lastDirection?: Direction,
 }
 
-const startPosition: Position = { x: 0, y: 0 }
 const initialState: State = {
-  position: startPosition,
+  position: { x: 0, y: 0 },
+  bullets: [],
 }
 
 export function intent({ keys }: Sources): Stream<Action> {
@@ -35,8 +37,10 @@ export function intent({ keys }: Sources): Stream<Action> {
     )
     .map(actions.changeDirection)
 
+  const bullet$ = keys.down(KeyCode.Space).mapTo(actions.fireBullet())
+
   const time$ = xs.periodic(50).mapTo(actions.tick())
-  return xs.merge(direction$, time$)
+  return xs.merge(direction$, time$, bullet$)
 }
 
 export function model(action$: Stream<Action>): Stream<State> {

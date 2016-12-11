@@ -1,10 +1,18 @@
 import { Direction } from '../utils/direction'
-import reducer from '../reducer'
+import { State } from '..'
+
 import * as actions from '../actions'
+import reducer from '../reducer'
+
+const defaultState: State = {
+  position: { x: 0, y: 0 },
+  bullets: [],
+}
 
 describe('Tick:', () => {
   it('should move up', () => {
     const state = {
+      ...defaultState,
       position: { x: 0, y: 100 },
       direction: Direction.Up,
     }
@@ -16,6 +24,7 @@ describe('Tick:', () => {
 
   it('should move down', () => {
     const state = {
+      ...defaultState,
       position: { x: 0, y: 100 },
       direction: Direction.Down,
     }
@@ -27,6 +36,7 @@ describe('Tick:', () => {
 
   it('should move right', () => {
     const state = {
+      ...defaultState,
       position: { x: 0, y: 0 },
       direction: Direction.Right,
     }
@@ -38,6 +48,7 @@ describe('Tick:', () => {
 
   it('should move left', () => {
     const state = {
+      ...defaultState,
       position: { x: 100, y: 0 },
       direction: Direction.Left,
     }
@@ -49,6 +60,7 @@ describe('Tick:', () => {
 
   it('should has up limit', () => {
     const state = {
+      ...defaultState,
       position: { x: 0, y: 0 },
       direction: Direction.Up,
     }
@@ -58,6 +70,7 @@ describe('Tick:', () => {
 
   it('should has down limit', () => {
     const state = {
+      ...defaultState,
       position: { x: 0, y: 2000 },
       direction: Direction.Down,
     }
@@ -69,6 +82,7 @@ describe('Tick:', () => {
 
   it('should has left limit', () => {
     const state = {
+      ...defaultState,
       position: { x: 0, y: 0 },
       direction: Direction.Left,
     }
@@ -78,6 +92,7 @@ describe('Tick:', () => {
 
   it('should has right limit', () => {
     const state = {
+      ...defaultState,
       position: { x: 2000, y: 0 },
       direction: Direction.Right,
     }
@@ -91,6 +106,7 @@ describe('Tick:', () => {
 describe('ChangeDirection:', () => {
   it('should change direction to right', () => {
     const state = {
+      ...defaultState,
       position: { x: 0, y: 0 },
       direction: Direction.Up,
     }
@@ -102,6 +118,7 @@ describe('ChangeDirection:', () => {
 
   it('should change direction to up', () => {
     const state = {
+      ...defaultState,
       position: { x: 0, y: 0 },
       direction: Direction.Down,
     }
