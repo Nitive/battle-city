@@ -12,10 +12,10 @@ import * as actions from './actions'
 import { Action } from './actions'
 
 export type State = {
-  position: Position,
-  bullets: Bullet[],
-  lastDirection: Direction,
-  direction?: Direction,
+  readonly position: Position,
+  readonly bullets: Bullet[],
+  readonly lastDirection: Direction,
+  readonly direction?: Direction,
 }
 
 const initialState: State = {
@@ -26,16 +26,39 @@ const initialState: State = {
 
 export function intent({ keys }: Sources): Stream<Action> {
   const direction$ = xs
-    .merge(
-      keys.down(KeyCode.Up).mapTo(Direction.Up),
-      keys.down(KeyCode.Down).mapTo(Direction.Down),
-      keys.down(KeyCode.Left).mapTo(Direction.Left),
-      keys.down(KeyCode.Right).mapTo(Direction.Right),
-      keys.up(KeyCode.Up).mapTo(undefined),
-      keys.up(KeyCode.Down).mapTo(undefined),
-      keys.up(KeyCode.Left).mapTo(undefined),
-      keys.up(KeyCode.Right).mapTo(undefined),
+    .combine(
+      keys.press(KeyCode.Up),
+      keys.press(KeyCode.Down),
+      keys.press(KeyCode.Left),
+      keys.press(KeyCode.Right),
     )
+    .fold(
+      (directionStack: Direction[], [up, down, left, right]) => {
+        if (up) {
+          directionStack = [Direction.Up, ...directionStack]
+        } else {
+          directionStack = directionStack.filter(dir => dir !== Direction.Up)
+        }
+        if (down) {
+          directionStack = [Direction.Down, ...directionStack]
+        } else {
+          directionStack = directionStack.filter(dir => dir !== Direction.Down)
+        }
+        if (left) {
+          directionStack = [Direction.Left, ...directionStack]
+        } else {
+          directionStack = directionStack.filter(dir => dir !== Direction.Left)
+        }
+        if (right) {
+          directionStack = [Direction.Right, ...directionStack]
+        } else {
+          directionStack = directionStack.filter(dir => dir !== Direction.Right)
+        }
+        return directionStack
+      },
+      [],
+    )
+    .map(x => x[0])
     .map(actions.changeDirection)
 
   const bullet$ = keys.down(KeyCode.Space).mapTo(actions.fireBullet())
