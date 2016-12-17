@@ -19,10 +19,12 @@ export function getBulletByTank(position: Position, direction: Direction): Bulle
   }
 }
 
-export function moveBulletInTick(bullet: Bullet): Bullet {
-  return {
-    ...bullet,
-    position: bulletStep(bullet.position, bullet.direction, 10),
+export function moveBullet(speed = 10) {
+  return (bullet: Bullet): Bullet => {
+    return {
+      ...bullet,
+      position: bulletStep(bullet.position, bullet.direction, speed),
+    }
   }
 }
 
