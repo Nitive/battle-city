@@ -2,7 +2,8 @@ import { Stream } from 'xstream'
 import { run } from '@cycle/xstream-run'
 import { makeDOMDriver, DOMSource, VNode } from '@cycle/dom'
 import { makeKeysDriver, KeysSource } from './utils/keys-driver'
-import { model, intent } from './state'
+import { model } from './state'
+import { intent } from './state/intent'
 import view from './view'
 
 export type Sources = {

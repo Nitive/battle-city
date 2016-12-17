@@ -8,43 +8,81 @@ function keyEvent(type: KeyEventType, keyCode: number) {
 }
 
 describe('keysDriver', () => {
-  it('down', done => {
+  it('down', () => {
     const driver = makeKeysDriver()
     const keys$ = driver()
 
-    keys$
-      .down(KeyCode.Space)
-      .addListener({
-        next(event) {
-          expect(event.keyCode).toBe(32)
-          done()
-        },
-        error: done,
-        complete: () => {
-          throw new Error('should not complete')
-        },
-      })
+    return new Promise((resolve, reject) => {
+      keys$
+        .down(KeyCode.Space)
+        .addListener({
+          next(event) {
+            expect(event.keyCode).toBe(32)
+            resolve()
+          },
+          error: reject,
+          complete: () => {
+            throw new Error('should not complete')
+          },
+        })
 
-      keyEvent('keydown', 32)
+        keyEvent('keydown', 32)
+    })
   })
 
-  it('up', done => {
+  it('up', () => {
     const driver = makeKeysDriver()
     const keys$ = driver()
 
-    keys$
-      .up(KeyCode.Space)
-      .addListener({
-        next(event) {
-          expect(event.keyCode).toBe(32)
-          done()
-        },
-        error: done,
-        complete: () => {
-          throw new Error('should not complete')
-        },
-      })
+    return new Promise((resolve, reject) => {
+      keys$
+        .up(KeyCode.Space)
+        .addListener({
+          next(event) {
+            expect(event.keyCode).toBe(32)
+            resolve()
+          },
+          error: reject,
+          complete: () => {
+            throw new Error('should not complete')
+          },
+        })
 
+        keyEvent('keyup', 32)
+    })
+  })
+
+  it('press', () => {
+    const driver = makeKeysDriver()
+    const keys$ = driver()
+    let down = false
+    const spy = jest.fn()
+
+    return new Promise((resolve, reject) => {
+      keys$
+        .press(KeyCode.Space)
+        .addListener({
+          next(isPressed) {
+            spy()
+            if (down) {
+              expect(isPressed).toBe(true)
+            } else {
+              expect(isPressed).toBe(false)
+
+              expect(spy).toHaveBeenCalledTimes(2)
+              resolve()
+            }
+          },
+          error: reject,
+          complete: () => {
+            throw new Error('should not complete')
+          },
+        })
+
+      down = true
+      keyEvent('keydown', 32)
+      down = false
       keyEvent('keyup', 32)
+    })
   })
 })
