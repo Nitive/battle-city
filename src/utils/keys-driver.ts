@@ -1,4 +1,4 @@
-import { Stream } from 'xstream'
+import xs, { Stream } from 'xstream'
 import fromEvent from 'xstream/extra/fromEvent'
 
 export const enum KeyCode {
@@ -14,9 +14,17 @@ export class KeysSource {
     return fromEvent(document, 'keydown')
       .filter(event => event.keyCode === code)
   }
+
   up(code: KeyCode): Stream<KeyboardEvent> {
     return fromEvent(document, 'keyup')
       .filter(event => event.keyCode === code)
+  }
+
+  press(code: KeyCode): Stream<boolean> {
+    return xs.merge(
+      this.down(code).mapTo(true),
+      this.up(code).mapTo(false),
+    )
   }
 }
 

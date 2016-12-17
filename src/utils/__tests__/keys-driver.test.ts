@@ -47,4 +47,32 @@ describe('keysDriver', () => {
 
       keyEvent('keyup', 32)
   })
+
+  it('press', done => {
+    const driver = makeKeysDriver()
+    const keys$ = driver()
+    let down = false
+
+    keys$
+      .press(KeyCode.Space)
+      .addListener({
+        next(isPressed) {
+          if (down) {
+            expect(isPressed).toBe(true)
+          } else {
+            expect(isPressed).toBe(false)
+            done()
+          }
+        },
+        error: done,
+        complete: () => {
+          throw new Error('should not complete')
+        },
+      })
+
+    down = true
+    keyEvent('keydown', 32)
+    down = false
+    keyEvent('keyup', 32)
+  })
 })
