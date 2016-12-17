@@ -1,22 +1,30 @@
 import { Direction } from './utils/direction'
 
-export type ChangeDirectionAction
-  = { type: 'ChangeDirection', payload: { direction?: Direction } }
+type ChangeDirection
+  = { type: 'ChangeDirection', direction?: Direction }
 
-export function changeDirection(direction: Direction): ChangeDirectionAction {
+export function changeDirection(direction: Direction): ChangeDirection {
   return {
     type: 'ChangeDirection',
-    payload: { direction },
+    direction,
   }
 }
 
-export type TickAction
+type Tick
   = { type: 'Tick' }
 
-export function tick(): TickAction {
+export function tick(): Tick {
   return { type: 'Tick' }
 }
 
+type FireBullet
+ = { type: 'FireBullet' }
+
+export function fireBullet(): FireBullet {
+  return { type: 'FireBullet' }
+}
+
 export type Action
-  = ChangeDirectionAction
-  | TickAction
+  = ChangeDirection
+  | Tick
+  | FireBullet

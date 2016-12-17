@@ -1,13 +1,14 @@
 import { State } from '.'
 import { Action } from './actions'
-import { step } from './utils/position'
+import { tankStep } from './utils/position'
+import { getBulletByTank, moveBulletInTick } from './utils/bullet'
 
 const speed = 5
 
 export default function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'ChangeDirection':
-      const { direction } = action.payload
+      const { direction } = action
       return {
         ...state,
         direction,
@@ -17,11 +18,20 @@ export default function reducer(state: State, action: Action): State {
       }
 
     case 'Tick':
+      const bullets = state.bullets.map(moveBulletInTick)
       return {
         ...state,
         position: state.direction != null
-          ? step(state.position, state.direction, speed)
+          ? tankStep(state.position, state.direction, speed)
           : state.position,
+        bullets,
+      }
+
+    case 'FireBullet':
+      const bullet = getBulletByTank(state.position, state.lastDirection)
+      return {
+        ...state,
+        bullets: state.bullets.concat(bullet),
       }
   }
 }
