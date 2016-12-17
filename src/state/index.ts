@@ -14,13 +14,14 @@ import { Action } from './actions'
 export type State = {
   position: Position,
   bullets: Bullet[],
+  lastDirection: Direction,
   direction?: Direction,
-  lastDirection?: Direction,
 }
 
 const initialState: State = {
   position: { x: 0, y: 0 },
   bullets: [],
+  lastDirection: Direction.Right,
 }
 
 export function intent({ keys }: Sources): Stream<Action> {

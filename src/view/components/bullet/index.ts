@@ -2,16 +2,16 @@ import { svg } from '@cycle/dom'
 
 import { Bullet } from '../../../state/utils/bullet'
 
+export const radius = 5
+
 export default function bullet(bullet: Bullet) {
-  const size = 10
   const { position } = bullet
 
-  return svg.rect({
+  return svg.circle({
     attrs: {
-      x: position.x,
-      y: position.y,
-      width: size,
-      height: size,
+      cx: position.x,
+      cy: position.y,
+      r: radius,
     },
   })
 }

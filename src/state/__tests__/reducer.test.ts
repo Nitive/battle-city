@@ -7,6 +7,8 @@ import reducer from '../reducer'
 const defaultState: State = {
   position: { x: 0, y: 0 },
   bullets: [],
+  direction: Direction.Right,
+  lastDirection: Direction.Right,
 }
 
 describe('Tick:', () => {
