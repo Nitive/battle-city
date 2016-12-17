@@ -1,7 +1,7 @@
 import { State } from '.'
 import { Action } from './actions'
-import { step } from './utils/position'
-import { getBulletByTank } from './utils/bullet'
+import { tankStep } from './utils/position'
+import { getBulletByTank, moveBulletInTick } from './utils/bullet'
 
 const speed = 5
 
@@ -18,11 +18,13 @@ export default function reducer(state: State, action: Action): State {
       }
 
     case 'Tick':
+      const bullets = state.bullets.map(moveBulletInTick)
       return {
         ...state,
         position: state.direction != null
-          ? step(state.position, state.direction, speed)
+          ? tankStep(state.position, state.direction, speed)
           : state.position,
+        bullets,
       }
 
     case 'FireBullet':
