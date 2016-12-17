@@ -27,10 +27,10 @@ const initialState: State = {
 export function intent({ keys }: Sources): Stream<Action> {
   const direction$ = xs
     .combine(
-      keys.press(KeyCode.Up),
-      keys.press(KeyCode.Down),
-      keys.press(KeyCode.Left),
-      keys.press(KeyCode.Right),
+      keys.press(KeyCode.Up).startWith(false),
+      keys.press(KeyCode.Down).startWith(false),
+      keys.press(KeyCode.Left).startWith(false),
+      keys.press(KeyCode.Right).startWith(false),
     )
     .fold(
       (directionStack: Direction[], [up, down, left, right]) => {
