@@ -4,7 +4,7 @@ import * as tank from '../../view/components/tank'
 import * as field from '../../view/components/field'
 import { radius } from '../../view/components/bullet'
 
-export type Bullet = {
+export interface Bullet {
   position: Position,
   direction: Direction,
 }

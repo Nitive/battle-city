@@ -13,7 +13,7 @@ const walls: Wall[] = [{
   size: { width: 50, height: 200 },
 }]
 
-export type State = {
+export interface State {
   readonly position: Position,
   readonly bullets: Bullet[],
   readonly lastDirection: Direction,

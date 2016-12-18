@@ -6,12 +6,12 @@ import { model } from './state'
 import { intent } from './state/intent'
 import view from './view'
 
-export type Sources = {
+export interface Sources {
   DOM: DOMSource,
   keys: KeysSource,
 }
 
-export type Sinks = {
+export interface Sinks {
   DOM: Stream<VNode>,
 }
 
