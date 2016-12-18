@@ -9,6 +9,7 @@ const defaultState: State = {
   bullets: [],
   direction: Direction.Right,
   lastDirection: Direction.Right,
+  walls: [],
 }
 
 describe('Tick:', () => {
