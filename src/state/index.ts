@@ -1,23 +1,32 @@
 import { Stream } from 'xstream'
 
-import { Position } from './utils/position'
+import { Tank } from './utils/tank'
 import { Direction } from './utils/direction'
 import { Bullet } from './utils/bullet'
+import { Wall } from './utils/wall'
 
 import reducer from './reducer'
 import { Action } from './actions'
 
-export type State = {
-  readonly position: Position,
+const walls: Wall[] = [{
+  position: { x: 500, y: 200 },
+  size: { width: 50, height: 200 },
+}]
+
+export interface State {
+  readonly tank: Tank,
   readonly bullets: Bullet[],
-  readonly lastDirection: Direction,
-  readonly direction?: Direction,
+
+  readonly walls: Wall[],
 }
 
 const initialState: State = {
-  position: { x: 0, y: 0 },
+  tank: {
+    position: { x: 0, y: 0 },
+    lastDirection: Direction.Right,
+  },
   bullets: [],
-  lastDirection: Direction.Right,
+  walls,
 }
 
 export function model(action$: Stream<Action>): Stream<State> {

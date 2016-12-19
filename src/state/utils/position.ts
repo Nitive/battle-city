@@ -1,11 +1,11 @@
 import { clamp } from 'ramda'
 
 import { Direction } from './direction'
+import { Offsets } from './offsets'
+import { Wall } from './wall'
 import * as field from '../../view/components/field'
-import * as tank from '../../view/components/tank'
-import { radius } from '../../view/components/bullet'
 
-export type Position = {
+export interface Position {
   x: number,
   y: number,
 }
@@ -42,5 +42,14 @@ export function step(update: (position: Position, diff: Position) => Position) {
   }
 }
 
-export const tankStep = step(updatePosition(tank.width, tank.height))
-export const bulletStep = step(updatePosition(-radius, -radius, -radius, -radius))
+export function isPositionInWall(position: Position, offsets: Offsets, walls: Wall[]): boolean {
+  return walls.some(wall => {
+    const isHorizontalIn
+      = position.x + offsets.right >= wall.position.x
+     && position.x - offsets.left <= wall.position.x + wall.size.width
+    const isVerticalIn
+      = position.y + offsets.bottom >= wall.position.y
+     && position.y - offsets.top <= wall.position.y + wall.size.height
+    return isHorizontalIn && isVerticalIn
+  })
+}
