@@ -9,7 +9,7 @@ import wall from './components/wall'
 
 export default function view(state$: Stream<State>): Stream<VNode> {
   return state$.map(state => {
-    const { position, bullets, lastDirection, walls } = state
+    const { tank: { position, lastDirection }, bullets, walls } = state
     return div([
       field([
         tank(position, lastDirection),

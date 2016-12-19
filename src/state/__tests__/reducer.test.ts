@@ -5,10 +5,12 @@ import * as actions from '../actions'
 import reducer from '../reducer'
 
 const defaultState: State = {
-  position: { x: 0, y: 0 },
   bullets: [],
-  direction: Direction.Right,
-  lastDirection: Direction.Right,
+  tank: {
+    position: { x: 0, y: 0 },
+    direction: Direction.Right,
+    lastDirection: Direction.Right,
+  },
   walls: [],
 }
 
@@ -20,9 +22,9 @@ describe('Tick:', () => {
       direction: Direction.Up,
     }
 
-    const newState = reducer(state, actions.tick())
-    expect(newState.position.y).toBeLessThan(state.position.y)
-    expect(newState.position.x).toBe(state.position.x)
+    const { tank } = reducer(state, actions.tick())
+    expect(tank.position.y).toBeLessThan(state.position.y)
+    expect(tank.position.x).toBe(state.position.x)
   })
 
   it('should move down', () => {
@@ -32,9 +34,9 @@ describe('Tick:', () => {
       direction: Direction.Down,
     }
 
-    const newState = reducer(state, actions.tick())
-    expect(newState.position.y).toBeGreaterThan(state.position.y)
-    expect(newState.position.x).toBe(state.position.x)
+    const { tank } = reducer(state, actions.tick())
+    expect(tank.position.y).toBeGreaterThan(state.position.y)
+    expect(tank.position.x).toBe(state.position.x)
   })
 
   it('should move right', () => {
@@ -44,9 +46,9 @@ describe('Tick:', () => {
       direction: Direction.Right,
     }
 
-    const newState = reducer(state, actions.tick())
-    expect(newState.position.x).toBeGreaterThan(state.position.x)
-    expect(newState.position.y).toBe(state.position.y)
+    const { tank } = reducer(state, actions.tick())
+    expect(tank.position.x).toBeGreaterThan(state.position.x)
+    expect(tank.position.y).toBe(state.position.y)
   })
 
   it('should move left', () => {
@@ -56,9 +58,9 @@ describe('Tick:', () => {
       direction: Direction.Left,
     }
 
-    const newState = reducer(state, actions.tick())
-    expect(newState.position.x).toBeLessThan(state.position.x)
-    expect(newState.position.y).toBe(state.position.y)
+    const { tank } = reducer(state, actions.tick())
+    expect(tank.position.x).toBeLessThan(state.position.x)
+    expect(tank.position.y).toBe(state.position.y)
   })
 
   it('should has up limit', () => {
@@ -78,9 +80,9 @@ describe('Tick:', () => {
       direction: Direction.Down,
     }
 
-    const newState = reducer(state, actions.tick())
-    expect(newState.position.y).toBeLessThanOrEqual(state.position.y)
-    expect(newState.position.x).toBe(state.position.x)
+  const { tank } = reducer(state, actions.tick())
+    expect(tank.position.y).toBeLessThanOrEqual(state.position.y)
+    expect(tank.position.x).toBe(state.position.x)
   })
 
   it('should has left limit', () => {
@@ -100,9 +102,9 @@ describe('Tick:', () => {
       direction: Direction.Right,
     }
 
-    const newState = reducer(state, actions.tick())
-    expect(newState.position.x).toBeLessThanOrEqual(state.position.x)
-    expect(newState.position.y).toBe(state.position.y)
+    const { tank } = reducer(state, actions.tick())
+    expect(tank.position.x).toBeLessThanOrEqual(state.position.x)
+    expect(tank.position.y).toBe(state.position.y)
   })
 })
 
@@ -114,9 +116,9 @@ describe('ChangeDirection:', () => {
       direction: Direction.Up,
     }
 
-    const newState = reducer(state, actions.changeDirection(Direction.Right))
-    expect(newState.direction).toBe(Direction.Right)
-    expect(newState.lastDirection).toBe(Direction.Right)
+    const { tank } = reducer(state, actions.changeDirection(Direction.Right))
+    expect(tank.direction).toBe(Direction.Right)
+    expect(tank.lastDirection).toBe(Direction.Right)
   })
 
   it('should change direction to up', () => {
@@ -126,8 +128,8 @@ describe('ChangeDirection:', () => {
       direction: Direction.Down,
     }
 
-    const newState = reducer(state, actions.changeDirection(Direction.Up))
-    expect(newState.direction).toBe(Direction.Up)
-    expect(newState.lastDirection).toBe(Direction.Up)
+    const { tank } = reducer(state, actions.changeDirection(Direction.Up))
+    expect(tank.direction).toBe(Direction.Up)
+    expect(tank.lastDirection).toBe(Direction.Up)
   })
 })

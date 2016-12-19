@@ -1,6 +1,6 @@
 import { Stream } from 'xstream'
 
-import { Position } from './utils/position'
+import { Tank } from './utils/tank'
 import { Direction } from './utils/direction'
 import { Bullet } from './utils/bullet'
 import { Wall } from './utils/wall'
@@ -14,17 +14,18 @@ const walls: Wall[] = [{
 }]
 
 export interface State {
-  readonly position: Position,
+  readonly tank: Tank,
   readonly bullets: Bullet[],
-  readonly lastDirection: Direction,
-  readonly direction?: Direction,
+
   readonly walls: Wall[],
 }
 
 const initialState: State = {
-  position: { x: 0, y: 0 },
+  tank: {
+    position: { x: 0, y: 0 },
+    lastDirection: Direction.Right,
+  },
   bullets: [],
-  lastDirection: Direction.Right,
   walls,
 }
 

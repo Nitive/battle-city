@@ -1,6 +1,9 @@
+// tslint:disable:no-switch-case-fall-through
+// see https://github.com/palantir/tslint/issues/1538#issuecomment-253700633
+
 import { State } from '.'
 import { Action } from './actions'
-import { tankStep } from './utils/position'
+import { tankStep, isTankInWall } from './utils/tank'
 import * as bulletUtils from './utils/bullet'
 import { reject, pipe, filter, map } from 'ramda'
 
@@ -11,19 +14,23 @@ const moveBulletInTick = bulletUtils.moveBullet(bulletSpeed)
 
 export default function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'ChangeDirection':
+    case 'ChangeDirection': {
       const { direction } = action
       const lastDirection = direction != null
         ? direction
-        : state.lastDirection
+        : state.tank.lastDirection
 
       return {
         ...state,
-        direction,
-        lastDirection,
+        tank: {
+          ...state.tank,
+          direction,
+          lastDirection,
+        },
       }
+    }
 
-    case 'Tick':
+    case 'Tick': {
       const blowUp = bulletUtils.blowUpBullet(state.walls)
       const bullets = state.bullets.map(blowUp)
 
@@ -36,22 +43,30 @@ export default function reducer(state: State, action: Action): State {
       const flyingBullets = reject(bulletUtils.isBlowingUpBullet, bullets)
         .map(moveBulletInTick)
 
-      const position = state.direction != null
-        ? tankStep(state.position, state.direction, tankSpeed)
-        : state.position
+      const { tank, walls } = state
+      const newPosition = tank.direction != null && tankStep(tank.position, tank.direction, tankSpeed)
+      const position = newPosition
+        ? isTankInWall(newPosition, walls) ? tank.position : newPosition
+        : tank.position
 
       return {
         ...state,
-        position,
+        tank: {
+          ...state.tank,
+          position,
+        },
         bullets: [...flyingBullets, ...browingUpBullets],
       }
+    }
 
-    case 'FireBullet':
+    case 'FireBullet': {
+      const { tank } = state
       return {
         ...state,
         bullets: state.bullets.concat(
-          bulletUtils.getBulletByTank(state.position, state.lastDirection),
+          bulletUtils.getBulletByTank(tank.position, tank.lastDirection),
         ),
       }
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Position, bulletStep } from './position'
+import { Position, step, updatePosition, isPositionInWall } from './position'
 import { Direction } from './direction'
 import { Wall } from './wall'
 import * as tank from '../../view/components/tank'
@@ -22,6 +22,8 @@ export function getBulletByTank(position: Position, direction: Direction): Bulle
   }
 }
 
+const bulletStep = step(updatePosition(-radius, -radius, -radius, -radius))
+
 export function moveBullet(speed = 10) {
   return (bullet: Bullet): Bullet => {
     return {
@@ -39,15 +41,11 @@ export function isVisibleBullet(bullet: Bullet): boolean {
 }
 
 export function isBulletInWall(bullet: Bullet, walls: Wall[]): boolean {
-  return walls.some(wall => {
-    const isHorizontalIn
-      = bullet.position.x + radius >= wall.position.x
-     && bullet.position.x - radius <= wall.position.x + wall.size.width
-    const isVerticalIn
-      = bullet.position.y + radius >= wall.position.y
-     && bullet.position.y - radius <= wall.position.y + wall.size.height
-    return isHorizontalIn && isVerticalIn
-  })
+  return isPositionInWall(
+    bullet.position,
+    { top: radius, left: radius, right: radius, bottom: radius },
+    walls,
+  )
 }
 
 // explosion
