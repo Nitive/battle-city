@@ -43,7 +43,7 @@ export default function reducer(state: State, action: Action): State {
       return {
         ...state,
         position,
-        bullets: [...browingUpBullets, ...flyingBullets],
+        bullets: [...flyingBullets, ...browingUpBullets],
       }
 
     case 'FireBullet':
