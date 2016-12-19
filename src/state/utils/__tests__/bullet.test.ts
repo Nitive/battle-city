@@ -16,8 +16,8 @@ const wall1 = {
 }
 
 const wall2 = {
-  position: { x: 100, y: 100 },
-  size: { width: 100, height: 100 },
+  position: { x: 200, y: 200 },
+  size: { width: 50, height: 300 },
 }
 
 describe('isBulletInWall', () => {
@@ -51,5 +51,15 @@ describe('isBulletInWall', () => {
     expect(
       isBulletInWall({ ...defaultBullet, position: { x: 206, y: 204 } }, [wall1]),
     ).toBe(false)
+  })
+
+  it('should work with few walls', () => {
+    const walls = [wall1, wall2]
+    expect(
+      isBulletInWall({ ...defaultBullet, position: { x: 205, y: 205 } }, walls),
+    ).toBe(true)
+    expect(
+      isBulletInWall({ ...defaultBullet, position: { x: 230, y: 400 } }, walls),
+    ).toBe(true)
   })
 })
