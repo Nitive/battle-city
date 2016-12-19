@@ -8,11 +8,6 @@ const tankSpeed = 5
 const bulletSpeed = 15
 
 const moveBulletInTick = bulletUtils.moveBullet(bulletSpeed)
-const getBrowingUpBullets = pipe(
-  filter(bulletUtils.isBlowingUpBullet),
-  map(bulletUtils.blowUpBullet),
-  reject(bulletUtils.isBlowedUpBullet),
-)
 
 export default function reducer(state: State, action: Action): State {
   switch (action.type) {
@@ -29,9 +24,14 @@ export default function reducer(state: State, action: Action): State {
       }
 
     case 'Tick':
-      const bullets = state.bullets.map(bulletUtils.blowUpBullet)
+      const blowUp = bulletUtils.blowUpBullet(state.walls)
+      const bullets = state.bullets.map(blowUp)
 
-      const browingUpBullets = getBrowingUpBullets(bullets)
+      const browingUpBullets = pipe(
+        filter(bulletUtils.isBlowingUpBullet),
+        map(blowUp),
+        reject(bulletUtils.isBlowedUpBullet),
+      )(bullets)
 
       const flyingBullets = reject(bulletUtils.isBlowingUpBullet, bullets)
         .map(moveBulletInTick)

@@ -13,8 +13,8 @@ export default function view(state$: Stream<State>): Stream<VNode> {
     return div([
       field([
         tank(position, lastDirection),
-        ...bullets.map(bullet),
         ...walls.map(wall),
+        ...bullets.map(bullet),
       ]),
       div(`x: ${position.x}, y: ${position.y}`),
     ])

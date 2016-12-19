@@ -1,5 +1,6 @@
 import { Position, bulletStep } from './position'
 import { Direction } from './direction'
+import { Wall } from './wall'
 import * as tank from '../../view/components/tank'
 import * as field from '../../view/components/field'
 import { radius } from '../../view/components/bullet'
@@ -37,6 +38,18 @@ export function isVisibleBullet(bullet: Bullet): boolean {
   return horizontalInStage && verticalInStage
 }
 
+export function isBulletInWall(bullet: Bullet, walls: Wall[]): boolean {
+  return walls.some(wall => {
+    const isHorizontalIn
+      = bullet.position.x + radius >= wall.position.x
+     && bullet.position.x - radius <= wall.position.x + wall.size.width
+    const isVerticalIn
+      = bullet.position.y + radius >= wall.position.y
+     && bullet.position.y - radius <= wall.position.y + wall.size.height
+    return isHorizontalIn && isVerticalIn
+  })
+}
+
 // explosion
 
 export const maxExplosionStep = 5
@@ -49,8 +62,10 @@ export function isBlowedUpBullet(bullet: Bullet): boolean {
   return bullet.explosionStep >= maxExplosionStep
 }
 
-export function blowUpBullet(bullet: Bullet): Bullet {
-  return isBlowingUpBullet(bullet) || !isVisibleBullet(bullet)
-    ? { ...bullet, explosionStep: bullet.explosionStep + 1 }
-    : bullet
+export function blowUpBullet(walls: Wall[]) {
+  return (bullet: Bullet): Bullet => {
+    return isBlowingUpBullet(bullet) || !isVisibleBullet(bullet) || isBulletInWall(bullet, walls)
+      ? { ...bullet, explosionStep: bullet.explosionStep + 1 }
+      : bullet
+  }
 }
