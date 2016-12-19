@@ -7,6 +7,7 @@ import { radius } from '../../view/components/bullet'
 export interface Bullet {
   position: Position,
   direction: Direction,
+  explosionStep: number,
 }
 
 export function getBulletByTank(position: Position, direction: Direction): Bullet {
@@ -16,6 +17,7 @@ export function getBulletByTank(position: Position, direction: Direction): Bulle
       y: position.y + tank.height / 2,
     },
     direction,
+    explosionStep: 0,
   }
 }
 
@@ -29,7 +31,26 @@ export function moveBullet(speed = 10) {
 }
 
 export function isVisibleBullet(bullet: Bullet): boolean {
-  const horizontalInStage = bullet.position.x > -radius && bullet.position.x < field.width + radius
-  const verticalInStage = bullet.position.y > -radius && bullet.position.y < field.height + radius
+  const diameter = radius * 2
+  const horizontalInStage = bullet.position.x > diameter && bullet.position.x < field.width - diameter
+  const verticalInStage = bullet.position.y > diameter && bullet.position.y < field.height - diameter
   return horizontalInStage && verticalInStage
+}
+
+// explosion
+
+export const maxExplosionStep = 5
+
+export function isBlowingUpBullet(bullet: Bullet): boolean {
+  return bullet.explosionStep > 0
+}
+
+export function isBlowedUpBullet(bullet: Bullet): boolean {
+  return bullet.explosionStep >= maxExplosionStep
+}
+
+export function blowUpBullet(bullet: Bullet): Bullet {
+  return isBlowingUpBullet(bullet) || !isVisibleBullet(bullet)
+    ? { ...bullet, explosionStep: bullet.explosionStep + 1 }
+    : bullet
 }
